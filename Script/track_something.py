@@ -1,3 +1,6 @@
+#import tensorflow as tf
+#import tensorflow_hub as tfhub
+
 import argparse
 from enum import Enum
 from MoConVQCore.Env.vclode_track_env import VCLODETrackEnv
@@ -10,6 +13,13 @@ import MoConVQCore.Utils.pytorch_utils as ptu
 from MoConVQCore.Utils.motion_dataset import MotionDataSet
 
 import os
+
+# try:
+#     model = tfhub.load('https://bit.ly/metrabs_s')
+#     print("Metrabs 모델 로드 성공! ✅")
+# except Exception as e:
+#     print(f"모델 로드 실패: {e} ❌")
+
 
 def flatten_dict(dd, separator='_', prefix=''):
     return { prefix + separator + k if prefix else k : v
@@ -151,7 +161,7 @@ if __name__ == "__main__":
         
     if args['output_file'] == '':
         import time
-        motion_name = os.path.join('out', f'track_{time.time()}.bvh')
+        motion_name = os.path.join('out2', f'track_{time.time()}.bvh')
     else:
         motion_name = args['output_file']
     saver.to_file(motion_name)
